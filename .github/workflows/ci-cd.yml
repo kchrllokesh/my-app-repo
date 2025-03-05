@@ -30,7 +30,7 @@ jobs:
       # Build and push Docker image
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY_URI }} .
+          docker build -t ${{ secrets.ECR_REPOSITORY_URI }}:latest .
           docker push ${{ secrets.ECR_REPOSITORY_URI }}:latest
 
       # Decode and configure kubeconfig

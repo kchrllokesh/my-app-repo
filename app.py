@@ -1,10 +1,14 @@
-from flask import Flask # type: ignore # Import the Flask class from the flask module
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hi harshitha reddy hostel lo chadhuvko"
+    """
+    Home route that returns a welcome message.
+    """
+    return jsonify(message="Welcome to the application!")
 
 if __name__ == '__main__':
+    # Use environment variables or a config file for host and port
     app.run(host='0.0.0.0', port=8000)

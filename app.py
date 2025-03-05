@@ -7,7 +7,7 @@ def home():
     """
     Home route that returns a welcome message.
     """
-    return jsonify(message="Welcome to the application!")
+    return jsonify(message="devireddy-harshtha-reddy-tirupathi-hostel!")
 
 if __name__ == '__main__':
     # Use environment variables or a config file for host and port

@@ -31,8 +31,8 @@ jobs:
       # Build and push Docker image
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY_URI }}:latest .
-          docker push ${{ secrets.ECR_REPOSITORY_URI }}:latest
+          docker build -t ${{ secrets.ECR_REPOSITORY_URI }} .
+          docker push ${{ secrets.ECR_REPOSITORY_URI }}
 
       # Deploy to EKS
       - name: Deploy to EKS

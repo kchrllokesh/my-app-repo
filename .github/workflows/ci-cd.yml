@@ -33,6 +33,11 @@ jobs:
           docker build -t ${{ secrets.ECR_REPOSITORY_URI }}:latest .
           docker push ${{ secrets.ECR_REPOSITORY_URI }}:latest
 
+      # Create .kube directory if it doesn't exist
+      - name: Create .kube directory
+        run: |
+          mkdir -p ~/.kube
+
       # Decode and configure kubeconfig
       - name: Configure kubectl
         run: |

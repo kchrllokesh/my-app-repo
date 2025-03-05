@@ -33,22 +33,16 @@ jobs:
           docker build -t ${{ secrets.ECR_REPOSITORY_URI }}:latest .
           docker push ${{ secrets.ECR_REPOSITORY_URI }}:latest
 
-      # Create .kube directory if it doesn't exist
-      - name: Create .kube directory
-        run: |
-          mkdir -p ~/.kube
+      # Update kubeconfig using AWS CLI
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
-      # Decode and configure kubeconfig
-      - name: Configure kubectl
-        run: |
-          echo "$KUBECONFIG_CONTENTS" | base64 --decode > ~/.kube/config
-          chmod 600 ~/.kube/config
-        env:
-          KUBECONFIG_CONTENTS: ${{ secrets.KUBECONFIG_CONTENTS }}
+      # Verify cluster connection
+      - name: Verify cluster connection
+        run: kubectl cluster-info
 
       # Deploy to EKS
       - name: Deploy to EKS
         run: |
-          kubectl apply -f deployment.yaml --validate=false 
+          kubectl apply -f deployment.yaml --validate=false
           kubectl apply -f service.yaml --validate=false
-          

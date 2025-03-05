@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: my-app-repo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: my-app-repo
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app-repo
     spec:
       containers:
-      - name: my-app
+      - name: my-app-repo
         image: 970547346793.dkr.ecr.us-east-1.amazonaws.com/my-app-repo:latest
         ports:
         - containerPort: 8000
